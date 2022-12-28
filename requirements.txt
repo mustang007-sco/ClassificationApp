@@ -1,0 +1,13 @@
+streamlit
+pandas
+numpy
+sklearn
+pickle
+matplotlib
+seaborn
+plotly
+gunicorn
+joblib
+os
+base64
+time
