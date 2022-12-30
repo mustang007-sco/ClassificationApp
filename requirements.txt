@@ -1,5 +1,5 @@
 joblib==1.1.0
-
+pillow
 matplotlib==3.5.2
 numpy==1.21.5
 scikit-learn
