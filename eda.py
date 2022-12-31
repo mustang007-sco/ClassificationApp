@@ -23,7 +23,7 @@ def run_eda_app():
             
             df = pd.read_csv(data_file)
             # test = load_data("test_data.csv")
-            test_result = df.copy()
+            #test_result = df.copy()
             #st.dataframe(df)
             #df_freq = load_data("freqdist_of_age_data.csv")
     
