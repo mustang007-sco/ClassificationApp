@@ -107,15 +107,27 @@ def run_ml_app():
             
 
     elif submenu == "Batch Predictions":
-        st.subheader("Batch Predictions")
+        st.subheader("Batch Predictions ")
+        with st.expander("Batch Predictions upload data"):
+            data_file = st.file_uploader("Upload CSV",type="csv")
+            if data_file is not None:
+                file_details = {"filename":data_file.name,
+                "filetype":data_file.type,"filesize":data_file.size}
+                st.write(data_file)
+                
+                test = pd.read_csv(data_file)
+                # test = load_data("test_data.csv")
+                test_result = test.copy()
+                st.dataframe(test)
+
+            submenu = st.sidebar.selectbox("Models",["Default","RandomForestClassifier","LogisticRegression","DecisionTreeClassifier"])
         with st.expander("Batch Predictions"):
-            test = load_data("test_data.csv")
-            test_result = test.copy()
-            st.dataframe(test)
 
-            submenu = st.sidebar.selectbox("Models",["RandomForestClassifier","LogisticRegression","DecisionTreeClassifier"])
-
-            if submenu == "RandomForestClassifier":
+            if submenu == "Default":
+                st.subheader("Choose your model")
+                st.markdown("Upload your file and choose a model to carry out your predictions")
+            
+            elif submenu == "RandomForestClassifier":
                 st.subheader("RandomForestClassifier")
                 model = load_model("model_rf.pkl")
                 prediction_batch_rf = model.predict(test)

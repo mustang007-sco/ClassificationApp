@@ -15,8 +15,17 @@ def load_data(data):
 
 def run_eda_app():
     st.subheader("From Exploratory Data Analysis ")
-    df = load_data("diabetes.csv")
-    df_freq = load_data("freqdist_of_age_data.csv")
+    data_file = st.file_uploader("Upload CSV",type="csv")
+    if data_file is not None:
+            file_details = {"filename":data_file.name,
+            "filetype":data_file.type,"filesize":data_file.size}
+            st.write(data_file)
+            
+            df = pd.read_csv(data_file)
+            # test = load_data("test_data.csv")
+            test_result = df.copy()
+            #st.dataframe(df)
+            #df_freq = load_data("freqdist_of_age_data.csv")
     
 
     submenu = st.sidebar.selectbox("Submenu",["Descriptive","Plots"])
@@ -63,10 +72,10 @@ def run_eda_app():
             with st.expander("Disribution of Outcomes"):
                 st.dataframe(df['Outcome'].value_counts())
         
-        with st.expander("Distribution of Age Frequency"):
-            #st.dataframe(df_freq)
-            p2 = px.bar(df_freq,x = 'Age',y = 'count')
-            st.plotly_chart(p2)
+        # with st.expander("Distribution of Age Frequency"):
+        #     #st.dataframe(df_freq)
+        #     p2 = px.bar(df_freq,x = 'Age',y = 'count')
+        #     st.plotly_chart(p2)
 
         with st.expander("Outlier Detection"):
             fig = plt.figure()
